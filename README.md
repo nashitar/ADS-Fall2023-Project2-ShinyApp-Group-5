@@ -4,30 +4,22 @@
 
 ![screenshot](doc/figs/map.jpg)
 
-In this second project of GR5243 Applied Data Science, we develop a *Exploratory Data Analysis and Visualization* shiny app on the work of a **NYC government agency/program** of your choice using NYC open data released on the [NYC Open Data By Agency](https://opendata.cityofnewyork.us/data/) website. In particular, many agencies have adjusted their work or rolled out new programs due to COVID, your app should provide ways for a user to explore quantiative measures of how covid has impacted daily life in NYC from different prospectives. See [Project 2 Description](doc/project2_desc.md) for more details.  
+In this second project of GR5243 Applied Data Science, we develop a *Exploratory Data Analysis and Visualization* shiny app on the work of a **OpenFEMA** of your choice using openFema Dataset released [here](https://www.fema.gov/about/openfema/data-sets). This app should provide ways for a user to explore quantiative measures of how disater were distributed across years and locations and demonstrate other disater-relevant measures. See [Project 2 Description](doc/project2_desc.md) for more details.  
 
-The **learning goals** for this project is:
+The raw data will be stored as a zip in the "data" subfolder because one of the raw csv file is too big to be uploaded to github.
 
-- business intelligence for data science
-- data cleaning
-- data visualization
-- systems development/design life cycle
-- shiny app/shiny server
 
-*The above general statement about project 2 can be removed once you are finished with your project. It is optional.
+## Exploration of Disasters in US
+Term: Fall 2023
 
-## Project Title Lorem ipsum dolor sit amet
-Term: Fall 2022
++ Team 5
++ **Exploration of Disasters in US**: + Team members
+	+ Clarence Jiang
+	+ Nashita Rahman
+	+ Yihan Zhang
+	+ Miao Zhang
 
-+ Team #
-+ **Projec title**: + Team members
-	+ team member 1
-	+ team member 2
-	+ team member 3
-	+ team member 4
-	+ team member 5
-
-+ **Project summary**: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
++ **Project summary**: [Wait to be edited]
 
 + **Contribution statement**: ([default](doc/a_note_on_contributions.md)) All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement. 
 
@@ -39,8 +31,7 @@ proj/
 ├── lib/
 ├── data/
 ├── doc/
-└── output/
+└── out/
 ```
 
 Please see each subfolder for a README file.
-
