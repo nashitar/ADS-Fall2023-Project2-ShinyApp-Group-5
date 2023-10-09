@@ -51,14 +51,14 @@ if (!require("plotly")) {
 
 
 #Data Processing
-raw_data <- read_csv("../data/raw_dataset_FemaWebDeclarationAreas.csv") %>% filter_all(all_vars(!is.na(.)))
-raw_data2 <- read_csv("../data/raw_dataset_DisasterDeclarationsSummaries.csv") %>% filter_all(all_vars(!is.na(.)))
+raw_data <- read_csv("../out/cleaned_dataset_FemaWebDeclarationAreas.csv") %>% filter_all(all_vars(!is.na(.)))
+raw_data2 <- read_csv("../out/DisasterDeclarationsSummariesCleaned.csv") %>% filter_all(all_vars(!is.na(.)))
 # Group by the column and then summarize, Other, Terrorist, Typhoon are 3 categories that appear too less 
 # count_data <- raw_data2 %>%
 #   group_by(declarationType) %>%
 #   summarise(Count = n())
 # print(count_data)
-raw_data3 <- read_csv("../data/raw_dataset_DisasterDeclarationsSummaries.csv")
+raw_data3 <- read_csv("../out/DisasterDeclarationsSummariesCleaned.csv")
 
 
 # set.seed(123)  # Setting a seed ensures reproducibility of the random sample
