@@ -1,0 +1,244 @@
+---
+title: "Untitled"
+author: "Miao Zhang"
+date: "2023-10-09"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+library(dplyr)
+library(readr)
+raw_data <- read_csv("./data/raw_dataset_FemaWebDeclarationAreas.csv") %>% filter_all(all_vars(!is.na(.)))
+raw_data2 <- read_csv("./data/raw_dataset_DisasterDeclarationsSummaries.csv")
+head(raw_data)
+
+
+```
+```{r}
+raw_data2$declarationDate
+
+
+
+
+```
+
+
+
+```{r}
+library(lubridate)
+raw_data2$year <- year(raw_data2$declarationDate)
+raw_data2$year
+
+```
+
+
+```{r}
+raw_data2$year <- year(raw_data2$declarationDate)
+unique_years <- unique(raw_data2$year)
+filtered_years <- unique_years[unique_years >= 2012 & unique_years <= 2023]
+
+filtered_years
+
+```
+
+```{r}
+unique(raw_data2$incidentType)
+
+
+```
+```{r}
+incident_counts <- table(raw_data2$incidentType)
+sorted_incidents <- sort(incident_counts, decreasing = TRUE)
+sorted_incidents
+选择：Severe Storm, Hurricane, Flood, Biological, Fire, Earthquake, Drought
+```
+
+
+
+```{r}
+filtered_data <- raw_data2 %>%
+      filter(fyDeclared>=2012)
+    
+filtered_data
+```
+
+```{r}
+    # 对过滤后的数据进行汇总，计算每个州每种灾害的出现次数
+    summary_data <- filtered_data%>%
+      group_by(raw_data2$state) %>%
+      tally() %>%
+      arrange(raw_data2$state, raw_data2$fyDeclared, -n)
+    
+    # 使用ggplot2绘制柱形图
+    ggplot(summary_data, aes(x = reorder(state, n), y = n, fill = incidentType)) +
+      geom_bar(stat = "identity", position = "dodge") +
+      facet_grid(~fyDeclared, scales = "free_x", space = "free_x") +
+      labs(x = "State", y = "Count", title = "Count of Natural Disasters by State and Type") + 
+      theme(
+        axis.text.x = element_text(size = 12),  # 调整x轴标签的字体大小
+        axis.text.y = element_text(size = 12),  # 调整y轴标签的字体大小
+        title = element_text(size = 16),        # 调整整体标题的字体大小
+        legend.title = element_text(size = 14),
+        axis.title.x = element_text(size = 14), # 调整x轴标题的字体大小
+        axis.title.y = element_text(size = 14)
+      ) 
+
+
+
+```
+```{r}
+ ggplot(raw_data2, aes(x = factor(state), fill = factor(incidentType))) +
+      geom_bar() +
+      labs(title = "Number of Disasters by State",
+           x = "State",
+           y = "Count",
+           fill = "Disaster Type") +
+      theme(plot.title = element_text(hjust = 0.5),
+            axis.text.x = element_text(hjust = 0.5, angle = 45),
+            legend.position = "right")
+
+
+
+```
+
+```{r}
+library(dplyr)
+cleaned_data <- raw_data2 %>%
+  filter(incidentType %in% c("Severe Storm", "Hurricane", "Flood", "Biological", "Fire", "Earthquake", "Drought")) %>%
+  filter(fyDeclared >= 1988 & fyDeclared <= 2023)
+
+cleaned_data
+```
+
+
+```{r}
+
+
+
+ 
+  
+  Confirmed_case <- reactive({
+    if ( "Severe Storm" %in% input$disaster_type){
+      data = cleaned_data3 %>% 
+        filter(incidentType== "Severe Storm")%>%
+        filter(fyDeclared>=2012 & fyDeclared<=2023)%>% 
+        group_by(fyDeclared,state) %>%
+        summarise(count=n)
+      return(data)
+    }
+    if ( "Hurricane" %in% input$disaster_type){
+      data = raw_data3 %>% 
+        filter(incidentType== "Hurricane")%>%
+        filter(fyDeclared>=2012 & fyDeclared<=2023)%>%
+        group_by(fyDeclared,state) %>%
+        summarise(count=n)
+      return(data)
+    }
+    if ( "Flood" %in% input$disaster_type){
+      data = raw_data3 %>% 
+        filter(incidentType== "Flood")%>%
+        filter(fyDeclared>=2012 & fyDeclared<=2023)%>% 
+        group_by(fyDeclared,state) %>%
+        summarise(count=n)
+      return(data)
+    }
+    if ( "Biological" %in% input$disaster_type){
+      data = raw_data3 %>% 
+        filter(incidentType== "Biological")%>%
+        filter(fyDeclared>=2012 & fyDeclared<=2023)%>%
+        group_by(fyDeclared,state) %>%
+        summarise(count=n)
+      return(data)
+    }
+    if ( "Fire" %in% input$disaster_type){
+      data = raw_data3 %>% 
+        filter(incidentType== "Fire")%>%
+        filter(fyDeclared>=2012 & fyDeclared<=2023)%>%
+        group_by(fyDeclared,state) %>%
+        summarise(count=n)
+      return(data)
+    }
+    
+    if ( "Earthquake" %in% input$disaster_type){
+      data = raw_data3 %>% 
+        filter(incidentType== "Earthquake")%>%
+        filter(fyDeclared>=2012 & fyDeclared<=2023)%>% 
+        group_by(fyDeclared,state) %>%
+        summarise(count=n)
+      return(data)
+    }
+    if ( "Drought" %in% input$disaster_type){
+      data = raw_data3 %>% 
+        filter(incidentType== "Drought")%>%
+        filter(fyDeclared>=2012 & fyDeclared<=2023)%>% 
+        group_by(fyDeclared, state) %>%
+        summarise(count=n)
+      return(data)
+    } else {
+      data <- raw_data3 %>% 
+        filter(incidentType == input$disaster_type) %>%
+        filter(fyDeclared >= 2012 & fyDeclared <= 2023) %>%
+        group_by(fyDeclared, state) %>%
+        summarise(count = n)}  
+    return(data)  
+  })
+
+  output$disaster_plot <- renderPlotly({
+    ggplot(Confirmed_case(), aes(x = fyDeclared, y = count, fill = state)) +
+      geom_bar(stat = 'identity') +
+      labs(title = "Number of Different Disasters for Each State Over the Years",
+           x = "Year",
+           y = "Count") +
+      theme_minimal()
+  })
+  
+what I want is the axis is the name of state, the bar plot shows the number of disasters of state. In the app, when I choose "2012", "Severe Storm",  it will show a barplot that the axis is state, each bar represent the number of severe storm 
+
+```
+
+
+
+
+```{r}
+
+cleaned_data <- cleaned_data %>%
+  mutate(year_range = case_when(
+    fyDeclared >= 2012 & fyDeclared <= 2023 ~ "2012-2023",
+    fyDeclared >= 2000 & fyDeclared <= 2011 ~ "2000-2011",
+    fyDeclared >= 1988 & fyDeclared <= 1999 ~ "1988-1999",
+  ))
+
+head(cleaned_data)
+
+```
+```{r}
+unique(cleaned_data$year_range)
+
+
+```
+
+
