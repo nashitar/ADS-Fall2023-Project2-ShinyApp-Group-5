@@ -29,7 +29,7 @@ if (!require("glue")) {
 shinyUI(
   navbarPage(strong("Disaster Distribution",style="color: white;"), 
              theme=shinytheme("sandstone"), # select your themes https://rstudio.github.io/shinythemes/
-             #------------------------------- tab panel - Maps ---------------------------------
+             #------------------------------- tab panel - Introduction & Background---------------------------------
              
              tabPanel("About",
                       tags$img(
@@ -57,8 +57,24 @@ shinyUI(
                       )
              ),
              #################### tab 2 ####################
-             tabPanel(
-               "Static Plots",
+             tabPanel("Interactive Plot 1",
+                      sidebarLayout(
+                        sidebarPanel(
+                          dateRangeInput("date_range",
+                                         "Select Year Range:",
+                                         start = min(raw_data3$fyDeclared), # 1953
+                                         end = max(raw_data3$fyDeclared),   # 2023
+                                         format = "yyyy")
+                          # Uncomment these lines if you want to include the selectInput for disaster type
+                          # selectInput("incident_Type",
+                          #             "Select Disaster Type:",
+                          #             choices = c("All", unique(df$incidentType))),
+                          # width = 3
+                        ),
+                        mainPanel(
+                          plotOutput("disaster_plot")
+                        )
+                      )
              ),
              #################### tab 3 ####################
              tabPanel(
@@ -66,7 +82,7 @@ shinyUI(
              ),
              #################### tab 4 ####################
              tabPanel(
-               "Trend",
+               "Year Trend Plot",
                fluidPage(
                  
                  tags$head(

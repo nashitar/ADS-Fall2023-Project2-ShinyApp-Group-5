@@ -51,14 +51,15 @@ if (!require("plotly")) {
 
 
 #Data Processing
-raw_data <- read_csv("../out/cleaned_dataset_FemaWebDeclarationAreas.csv") %>% filter_all(all_vars(!is.na(.)))
-raw_data2 <- read_csv("../out/DisasterDeclarationsSummariesCleaned.csv") %>% filter_all(all_vars(!is.na(.)))
-# Group by the column and then summarize, Other, Terrorist, Typhoon are 3 categories that appear too less 
-# count_data <- raw_data2 %>%
-#   group_by(declarationType) %>%
-#   summarise(Count = n())
-# print(count_data)
-raw_data3 <- read_csv("../out/DisasterDeclarationsSummariesCleaned.csv")
+raw_data <- raw_data %>% filter_all(all_vars(!is.na(.)))
+raw_data2 <- raw_data3 %>% filter_all(all_vars(!is.na(.)))
+# # Group by the column and then summarize, Other, Terrorist, Typhoon are 3 categories that appear too less 
+# # count_data <- raw_data2 %>%
+# #   group_by(declarationType) %>%
+# #   summarise(Count = n())
+# # print(count_data)
+# raw_data3 <- read_csv("../out/DisasterDeclarationsSummariesCleaned.csv")
+
 
 
 # set.seed(123)  # Setting a seed ensures reproducibility of the random sample
@@ -67,7 +68,46 @@ raw_data3 <- read_csv("../out/DisasterDeclarationsSummariesCleaned.csv")
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
+
+  # Static Plot section
+  output$disaster_plot <- renderPlot({
+
+    # filter data based on year selected and incident type
+    filtered_data <- raw_data3 %>%
+      filter(fyDeclared >= as.numeric(format(input$date_range[1], "%Y")) &
+               fyDeclared <= as.numeric(format(input$date_range[2], "%Y")))
+
+    #if(input$incidentType != "All") {
+    #filtered_data <- filtered_data %>% filter(incidentType == input$incidentType)
+    #}
+
+    # summarize the filtered data, and then count the number of occurrence of each incident type
+    summary_data <- filtered_data %>%
+      group_by(incidentType) %>%
+      tally() %>%
+      arrange(-n)
+
+    # generate bar plot
+    #p <-
+    ggplot(summary_data, aes(x = reorder(incidentType, n), y = n)) +
+      geom_bar(stat = "identity") +
+      geom_text(aes(label=n), position=position_dodge(width=2), hjust=-0.3, size=4) +
+      coord_flip() +
+      labs(x = "Disaster Type", y = "Count", title = "Count of Natural Disasters by Type", size=5) +
+      theme(
+        axis.text.x = element_text(size = 15),
+        axis.text.y = element_text(size = 15),
+        title = element_text(size = 20),
+        axis.title.x = element_text(size = 14),
+        axis.title.y = element_text(size = 14)
+      )
+
+  # Using ggplotly to generate interactive plot
+  # ggplotly(p)
+  })
   
+  # ------------------------------
+  # Filtered plot section
   
   rv <- reactiveValues(update = 0)
   observeEvent(input$StackedBCFilter, {
@@ -128,7 +168,7 @@ shinyServer(function(input, output) {
     }
   })
   
-  
+  # ------------------------------
   ## Map Tab section
   
   # Hardcode the file paths and column names
