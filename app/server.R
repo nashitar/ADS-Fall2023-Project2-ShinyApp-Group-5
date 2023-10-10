@@ -235,7 +235,7 @@ shinyServer(function(input, output) {
 
     df <- data.frame()
     if (incident_type != "All") {
-      filename <- glue('/out/DisasterDeclarationsSummaries{incident_type}.csv')
+      filename <- glue('out/DisasterDeclarationsSummaries{incident_type}.csv')
       temp <- read.csv(filename)
 
       # Filter out rows with missing or invalid lat/lon values
@@ -243,7 +243,7 @@ shinyServer(function(input, output) {
 
       df <- rbind(df, temp)
     } else {
-      filename <- glue('/out/DisasterDeclarationsSummariesCleaned.csv')
+      filename <- glue('out/DisasterDeclarationsSummariesCleaned.csv')
       temp <- read.csv(filename)
 
       # Filter out rows with missing or invalid lat/lon values

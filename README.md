@@ -19,7 +19,9 @@ Term: Fall 2023
 	+ Yihan Zhang
 	+ Miao Zhang
 
-+ **Project summary**: [Wait to be edited]
++ **Shiny App Link**: https://clarencejiang.shinyapps.io/stat5243_project2_team5/
+
++ **Project summary**: In this project, we used openFema data on disaster declaration summaries and web declaration areas to visualize the quantity and frequency of various disaters across different states and different time. We focused on creating a year trend plot, 2 interactive plots about location and incident types, and a final map.
 
 + **Contribution statement**: ([default](doc/a_note_on_contributions.md)) All team members contributed equally in all stages of this project. All team members approve our work presented in this GitHub repository including this contributions statement. 
 
@@ -28,10 +30,10 @@ Following [suggestions](http://nicercode.github.io/blog/2013-04-05-projects/) by
 ```
 proj/
 ├── app/
+	├──out/
 ├── lib/
 ├── data/
 ├── doc/
-└── out/
 ```
 
 Please see each subfolder for a README file.

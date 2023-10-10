@@ -60,45 +60,6 @@ shinyUI(
                         
                       )
              ),
-             #################### tab 2 ####################
-             tabPanel("Incident Type Plot",
-                      sidebarLayout(
-                        sidebarPanel(
-                          dateRangeInput("date_range",
-                                         "Select Year Range:",
-                                         start = min(raw_data3$fyDeclared), # 1953
-                                         end = max(raw_data3$fyDeclared),   # 2023
-                                         format = "yyyy")
-                          # Uncomment these lines if you want to include the selectInput for disaster type
-                          # selectInput("incident_Type",
-                          #             "Select Disaster Type:",
-                          #             choices = c("All", unique(df$incidentType))),
-                          # width = 3
-                        ),
-                        mainPanel(
-                          plotOutput("disaster_plot_1", height = 600)
-                        )
-                      )
-             ),
-             #################### tab 3 ####################
-             tabPanel("Location Plot",
-                      sidebarLayout(
-                        sidebarPanel(
-                          selectInput(inputId = "year",
-                                      label = "Choose year range:",
-                                      choices = c("2013-2023","2002-2012","1991-2001")),
-
-                          selectInput(inputId = "disaster_type",
-                                      label="Select Disaster Type:",
-                                      choices = c("Severe Storm", "Hurricane", "Flood", "Biological", "Fire", "Earthquake", "Drought")),
-                          width = 3
-                        ),
-
-                        mainPanel(
-                          plotOutput("disaster_plot_2", height = 600)
-                        )
-                      )
-             ),
              #################### tab 4 ####################
              tabPanel(
                "Year Trend Plot",
@@ -142,6 +103,46 @@ shinyUI(
                )
              )
              ,
+             #################### tab 2 ####################
+             tabPanel("Incident Type Plot",
+                      sidebarLayout(
+                        sidebarPanel(
+                          dateRangeInput("date_range",
+                                         "Select Year Range:",
+                                         start = min(raw_data3$fyDeclared), # 1953
+                                         end = max(raw_data3$fyDeclared),   # 2023
+                                         format = "yyyy")
+                          # Uncomment these lines if you want to include the selectInput for disaster type
+                          # selectInput("incident_Type",
+                          #             "Select Disaster Type:",
+                          #             choices = c("All", unique(df$incidentType))),
+                          # width = 3
+                        ),
+                        mainPanel(
+                          plotOutput("disaster_plot_1", height = 600)
+                        )
+                      )
+             ),
+             #################### tab 3 ####################
+             tabPanel("Location Plot",
+                      sidebarLayout(
+                        sidebarPanel(
+                          selectInput(inputId = "year",
+                                      label = "Choose year range:",
+                                      choices = c("2013-2023","2002-2012","1991-2001")),
+
+                          selectInput(inputId = "disaster_type",
+                                      label="Select Disaster Type:",
+                                      choices = c("Severe Storm", "Hurricane", "Flood", "Biological", "Fire", "Earthquake", "Drought")),
+                          width = 3
+                        ),
+
+                        mainPanel(
+                          plotOutput("disaster_plot_2", height = 600)
+                        )
+                      )
+             ),
+             
 
              tabPanel("Maps",
                       icon = icon("map-marker-alt"), #choose the icon for

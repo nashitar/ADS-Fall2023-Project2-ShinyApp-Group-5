@@ -11,10 +11,23 @@ Below is an example. If no contribution statement is provided, we will insert a 
 ---
 Sample project README statement.
 
-Project xxx
+Project 2 - Team 5 
 
-Team members: Avi Bond, Comma Deed, En Funn, Gem Hon
+Team members: Nashita Rahman, Clarence Jiang, Miao Zhang, Yihan Zhang
 
-Summary: In this project, we developed a new method and improved the classification accuracy for images of cats and dogs to 99.9%
+Summary: In this project, we used openFema data on disaster declaration summaries and web declaration areas to visualize the quantity and frequency of various disaters across different states and different time. We focused on creating a year trend plot, 2 interactive plots about location and incident types, and a final map.
 
-[Contribution Statement] AB, CD, EF and GH designed the study. AB and CD developed baseline classification model for evaluation. EF and GH explored feature engineering for improving the baseline model. AB, EF and GH discussed and designed the model evaluation protocol. CD carried out the computation for model evaluation. All team members contributed to the GitHub repository and prepared the presentation. All team members approve our work presented in our GitHub repository including this contribution statement.
+
+[Contribution Statement]:
+
+We both decided the topic and study.
+
+Nashita created an interactive map tab that displays a heatmap of the FEMA disaster declarations. The maps can be filtered by year range and incident type. Nashita used county and state information to generate latitude and longitude information for disaster declarations, which is the preprocessing step.
+
+Miao created the interactive plot of the location plot. The plot can filter by year range of 10 years and disaster type and shows the disaster count of different states.
+
+Yihan created the interactive plot of the incident type plot. The plot can filter by date and shows the count of different disastesr in the date range. 
+
+Clarence created the year trend plot. It shows 3 different disaster-features which can be selected by the user and demonstrates how the distribution of these features change over time. Clarence published the shiny app and helped merge the branches and git version control.
+
+All team members contributed to the GitHub repository and prepared the presentation. All team members approve our work presented in our GitHub repository including this contribution statement.

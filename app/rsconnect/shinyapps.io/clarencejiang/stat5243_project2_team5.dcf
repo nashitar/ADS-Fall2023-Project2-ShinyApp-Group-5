@@ -5,7 +5,7 @@ account: clarencejiang
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 10142049
-bundleId: 7783846
+bundleId: 7787560
 url: https://clarencejiang.shinyapps.io/stat5243_project2_team5/
 version: 1
 asMultiple: FALSE
