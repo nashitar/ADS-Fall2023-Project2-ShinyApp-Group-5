@@ -21,7 +21,11 @@ if (!require("leaflet.extras")) {
 }
 if (!require("glue")) {
   install.packages("glue")
-  library(leaflet.extras)
+  library(glue)
+}
+if (!require("forcats")) {
+  install.packages("forcats")
+  library(forcats)
 }
 
 
@@ -57,7 +61,7 @@ shinyUI(
                       )
              ),
              #################### tab 2 ####################
-             tabPanel("Interactive Plot 1",
+             tabPanel("Incident Type Plot",
                       sidebarLayout(
                         sidebarPanel(
                           dateRangeInput("date_range",
@@ -72,13 +76,28 @@ shinyUI(
                           # width = 3
                         ),
                         mainPanel(
-                          plotOutput("disaster_plot")
+                          plotOutput("disaster_plot_1", height = 600)
                         )
                       )
              ),
              #################### tab 3 ####################
-             tabPanel(
-               "Interactive Plot",
+             tabPanel("Location Plot",
+                      sidebarLayout(
+                        sidebarPanel(
+                          selectInput(inputId = "year",
+                                      label = "Choose year range:",
+                                      choices = c("2013-2023","2002-2012","1991-2001")),
+
+                          selectInput(inputId = "disaster_type",
+                                      label="Select Disaster Type:",
+                                      choices = c("Severe Storm", "Hurricane", "Flood", "Biological", "Fire", "Earthquake", "Drought")),
+                          width = 3
+                        ),
+
+                        mainPanel(
+                          plotOutput("disaster_plot_2", height = 600)
+                        )
+                      )
              ),
              #################### tab 4 ####################
              tabPanel(
@@ -117,7 +136,7 @@ shinyUI(
                  # Plot in the center
                  fluidRow(
                    column(12, 
-                          plotOutput("box")
+                          plotOutput("box", height = "700px", width = "100%")
                    )
                  )
                )
@@ -140,7 +159,7 @@ shinyUI(
                                                    min = 1953,
                                                    max = 2023,
                                                    value = c(1953, 2023)),
-                                       leafletOutput("map_year")),
+                                       leafletOutput("map_year", height = 600, width = "100%")),
                               
                               tabPanel("Filter by Incident Type",
                                        selectInput("incident_type_filter", "Select Incident Type", 
@@ -152,7 +171,7 @@ shinyUI(
                                                      'Freezing', 'ToxicSubstances', 'Chemical', 
                                                      'Terrorist', 'Drought', 'HumanCause', 
                                                      'FishingLosses', 'Tsunami')),
-                                       leafletOutput("map_incident_type"))
+                                       leafletOutput("map_incident_type", height = 600, width = "100%"))
                             )
                           ) #Panel Control - Closing
                       ) #Maps - Div closing

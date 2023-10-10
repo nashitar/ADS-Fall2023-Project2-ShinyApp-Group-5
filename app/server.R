@@ -53,6 +53,12 @@ if (!require("plotly")) {
 #Data Processing
 raw_data <- raw_data %>% filter_all(all_vars(!is.na(.)))
 raw_data2 <- raw_data3 %>% filter_all(all_vars(!is.na(.)))
+cleaned_data <- raw_data3 %>%
+  mutate(year_range = case_when(
+    fyDeclared >= 2013 & fyDeclared <= 2023 ~ "2013-2023",
+    fyDeclared >= 2002 & fyDeclared <= 2012 ~ "2002-2012",
+    fyDeclared >= 1991 & fyDeclared <= 2001 ~ "1991-2001",
+  ))
 # # Group by the column and then summarize, Other, Terrorist, Typhoon are 3 categories that appear too less 
 # # count_data <- raw_data2 %>%
 # #   group_by(declarationType) %>%
@@ -69,8 +75,8 @@ raw_data2 <- raw_data3 %>% filter_all(all_vars(!is.na(.)))
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
 
-  # Static Plot section
-  output$disaster_plot <- renderPlot({
+  # Interactive Plot 1 section
+  output$disaster_plot_1 <- renderPlot({
 
     # filter data based on year selected and incident type
     filtered_data <- raw_data3 %>%
@@ -106,6 +112,32 @@ shinyServer(function(input, output) {
   # ggplotly(p)
   })
   
+  
+  # ------------------------------
+  # Interactive Plot 2 section
+
+  plot_byDate <- function(year, disaster_type){
+    
+    cleaned_data %>%
+      filter(year_range %in% year) %>%
+      filter(incidentType %in% disaster_type) %>%
+      group_by(state) %>%
+      summarise(count=n()) %>%
+      ggplot(aes(x=state, y=count)) + geom_col(width = 0.7) +
+      theme(
+        axis.title.x = element_text(size=16),  # Adjusts the x-axis label size
+        axis.title.y = element_text(size=16),  # Adjusts the y-axis label size
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size=14)   # Adjusts the x-axis tick text size
+      ) +
+      xlab("state") +
+      ylab("Number of disaster occurrences") +
+      ggtitle("Number disaster occurrences by states")
+  }
+  
+
+  output$disaster_plot_2 <- renderPlot(
+    plot_byDate(input$year,input$disaster_type))
+
   # ------------------------------
   # Filtered plot section
   
