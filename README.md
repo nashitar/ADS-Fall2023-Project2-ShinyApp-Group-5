@@ -4,9 +4,9 @@
 
 ![screenshot](doc/figs/map.jpg)
 
-In this second project of GR5243 Applied Data Science, we develop a *Exploratory Data Analysis and Visualization* shiny app on the work of a **OpenFEMA** of your choice using openFema Dataset released [here](https://www.fema.gov/about/openfema/data-sets). The 2 detailed links are: [here](https://www.fema.gov/openfema-data-page/fema-web-declaration-areas-v1) and [here](https://www.fema.gov/openfema-data-page/disaster-declarations-summaries-v2). This app should provide ways for a user to explore quantiative measures of how disater were distributed across years and locations and demonstrate other disater-relevant measures. See [Project 2 Description](doc/project2_desc.md) for more details.  
+In this second project of GR5243 Applied Data Science, we develop a *Exploratory Data Analysis and Visualization* shiny app on the work of a **OpenFEMA** using openFema Dataset released [here](https://www.fema.gov/about/openfema/data-sets). The 2 detailed links are: [here](https://www.fema.gov/openfema-data-page/fema-web-declaration-areas-v1) and [here](https://www.fema.gov/openfema-data-page/disaster-declarations-summaries-v2). This app should provide ways for a user to explore quantiative measures of how disater were distributed across years and locations and demonstrate other disater-relevant measures. See [Project 2 Description](doc/project2_desc.md) for more details.  
 
-The raw data will be stored as a zip in the "data" subfolder because one of the raw csv file is too big to be uploaded to github.
+The raw data is not directly contained in this repo because of its huge file size and github policy, but all the cleaned datasaets that will be used are included in the app/out folder. The raw dataset file links are already given above in this ReadMe.
 
 
 ## Exploration of Disasters in US
